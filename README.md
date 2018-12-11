@@ -7,7 +7,6 @@
 <li>API - Web Service (SOAP / REST Implementation)</li>
 </ul>
 <h2>Credentials</h2>
-<br>
 Username: test
 Pass:     test
 <h2>Contributors</h2>
