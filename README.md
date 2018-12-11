@@ -6,10 +6,13 @@
 <li>Server (JAVA JPA)</li>
 <li>API - Web Service (SOAP / REST Implementation)</li>
 </ul>
+<h2>Credentials</h2>
+<br>
+Username: test
+Pass:     test
 <h2>Contributors</h2>
 Marc Willimann          Team Lead + AlphaRooms Name Giver <br>
 Sandro Spenduto         MRTG + UseCase Diagramm Professional <br>
-Tim Arnold              WhatsApp Group Creator + Updater ;-D <br>
 <h2>Git Commands</h2>
 <div>
 <h5><strong>Wichtige Git Befehle</strong></h5>
