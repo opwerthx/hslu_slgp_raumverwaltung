@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="568.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.StatViewController">
+	<children>
+      <TableView fx:id="table_room" layoutX="14.0" layoutY="10.0" prefHeight="460.0" prefWidth="876.0">
+        <columns>
+        <TableColumn fx:id="col_id" minWidth="0.0" prefWidth="26.0" text="ID" />
+          <TableColumn fx:id="col_equipment" prefWidth="149.0" text="Raum" />
+          <TableColumn fx:id="col_location" prefWidth="231.0" text="Ort" />
+            <TableColumn fx:id="col_room" prefWidth="148.0" text="Tageszeit" />
+            <TableColumn fx:id="col_min" prefWidth="145.0" text="Buchungen Gesamt" />
+            <TableColumn fx:id="col_max" prefWidth="176.0" text="Belegung Durchschnitt" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblMessage" layoutX="601.0" layoutY="472.0" prefHeight="17.0" prefWidth="139.0" />
+	</children>
+</AnchorPane>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="568.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.UserViewController">
+	<children>
+      <TableView fx:id="table_user" layoutX="14.0" layoutY="10.0" prefHeight="460.0" prefWidth="876.0">
+        <columns>
+        <TableColumn fx:id="col_id" prefWidth="1.0" text="ID" />
+          <TableColumn fx:id="col_username" prefWidth="134.0" text="Username" />
+          <TableColumn fx:id="col_mail" prefWidth="1.0" text="E-Mail" />
+          <TableColumn fx:id="col_firstname" prefWidth="134.0" text="Session" />
+          <TableColumn fx:id="col_name" prefWidth="134.0" text="Name" />
+          <TableColumn fx:id="col_password" prefWidth="134.0" text="Passwort" />
+          <TableColumn fx:id="col_role" prefWidth="134.0" text="Rolle" />
+        </columns>
+      </TableView>
+		<TextField fx:id="txtusername" layoutX="25.0" layoutY="533.0" prefHeight="25.0" prefWidth="139.0" />
+		<TextField fx:id="txtmail" layoutX="165.0" layoutY="533.0" opacity="0.0" prefHeight="25.0" prefWidth="0.1" />
+		<TextField fx:id="txtname" layoutX="304.0" layoutY="533.0" prefHeight="25.0" prefWidth="139.0" />
+		<ComboBox fx:id="cmbrole" layoutX="445.0" layoutY="533.0" prefHeight="25.0" prefWidth="139.0" />
+		<TextField fx:id="txtpassword" layoutX="586.0" layoutY="533.0" prefHeight="25.0" prefWidth="139.0" />
+		<Button fx:id="btnRemove" layoutX="25.0" layoutY="472.0" mnemonicParsing="false" onAction="#onRemove" prefHeight="25.0" prefWidth="139.0" text="Löschen" />
+		<Button fx:id="btnReset" layoutX="165.0" layoutY="472.0" mnemonicParsing="false" onAction="#onReset" prefHeight="25.0" prefWidth="139.0" text="Reset" />
+		<Button fx:id="btnUpdate" layoutX="304.0" layoutY="472.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="25.0" prefWidth="139.0" text="Update" />
+		<Button fx:id="btnAdd" layoutX="445.0" layoutY="472.0" mnemonicParsing="false" onAction="#onAdd" prefHeight="25.0" prefWidth="140.0" text="Hinzufügen" />
+     <!--  <Label fx:id="lblMessage" layoutX="165.0" layoutY="512.0" prefHeight="17.0" prefWidth="139.0" text="E-Mail:" />-->
+      <Label fx:id="lblMessage1" layoutX="25.0" layoutY="512.0" prefHeight="17.0" prefWidth="139.0" text="Username:" />
+      <Label fx:id="lblMessage2" layoutX="304.0" layoutY="512.0" prefHeight="17.0" prefWidth="139.0" text="Name:" />
+      <Label fx:id="lblMessage3" layoutX="446.0" layoutY="512.0" prefHeight="17.0" prefWidth="139.0" text="Rolle:" />
+      <Label fx:id="lblMessage3" layoutX="588.0" layoutY="512.0" prefHeight="17.0" prefWidth="139.0" text="Passwort:" />
+      <Label fx:id="lblMessage" layoutX="601.0" layoutY="472.0" prefHeight="17.0" prefWidth="139.0" />
+	</children>
+</AnchorPane>

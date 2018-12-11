@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="43.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hilfe?" />
+      <Text layoutX="43.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="you can find us on" />
+      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="43.0" layoutY="129.0">
+         <image>
+            <Image url="@../Downloads/mail-1138-827052.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="43.0" layoutY="183.0">
+         <image>
+            <Image url="@../Downloads/internet.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="43.0" layoutY="334.0">
+         <image>
+            <Image url="@../Downloads/whatsapp-logo_318-49685.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="43.0" layoutY="234.0">
+         <image>
+            <Image url="@../Downloads/instagram-new-2016-glyph-logo-84CB825424-seeklogo.com.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="35.0" layoutX="43.0" layoutY="283.0">
+         <image>
+            <Image url="@../Downloads/twitter-circular-logo_318-53069.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="128.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="info@alpharooms.com" />
+      <Text layoutX="128.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="alpharooms.ch" />
+      <Text layoutX="128.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="alpha_rooms" />
+      <Text layoutX="128.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="alpha_rooms" />
+      <Text layoutX="128.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+41 79 911 11 11" />
+      <MenuBar layoutX="24.0" layoutY="24.0" prefHeight="29.0" prefWidth="558.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Kalender">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Räume">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Historie">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Stornieren">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Personalverwaltung">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Hilfe">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
