@@ -8,13 +8,13 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-public class UserLogin implements Serializable {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+public class UserLogin implements Serializable {
 
 	private static final long serialVersionUID = 2087551531556192267L;
 
@@ -22,16 +22,12 @@ public class UserLogin implements Serializable {
  		      
 	   }
 	   
-		   public static void main( String[ ] args ) {
-			      
-		   } 
-	    
+
 	   public boolean checkUserLogin(String pUser, String pPass, String pSession) {
-		   EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "persister" );
-		   
-		   EntityManager em = emfactory.createEntityManager( );
-		   em.getTransaction( ).begin( );
-		   TypedQuery<User> tQuery =
+			EntityManager em = JPAUtil.createEntityManager();
+			   em.getTransaction( ).begin( );
+		  try {
+			   TypedQuery<User> tQuery =
 				   em.createQuery("SELECT p FROM users p WHERE p.username=?1 AND p.password=?2", User.class);
 		   tQuery.setParameter(1, pUser);
 		   tQuery.setParameter(2, pPass);
@@ -58,11 +54,21 @@ public class UserLogin implements Serializable {
 		   return true;		  
 		   }
 		return false;
+		
+	   } catch (Exception e) {
+			System.out.print(" >> Auth Exec failed: "+ e);
+			throw e;
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
+		
 	   }
 	   
 	   public api.User getUserInfo(String pUser) {
-		   EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "persister" );
-		   EntityManager em = emfactory.createEntityManager( );
+			EntityManager em = JPAUtil.createEntityManager();
+		   try {
 		   em.getTransaction( ).begin( );
 		   TypedQuery<User> tQuery =
 				   em.createQuery("SELECT p FROM users p WHERE p.username=?1", User.class);
@@ -80,12 +86,21 @@ public class UserLogin implements Serializable {
 		   api.User user = new api.User(p.getUserId(),p.getUsername(),p.getMUser(),p.getName(),p.getPassword(),p.getRole(),p.getRowFlag(),p.getCUser(),p.getEmail(),p.getFirstname(),p.getCTs(),p.getCreateTime(),p.getMTs());
 		   System.out.print("getUserInfo successfull");
 		   return user; 
+	   } catch (Exception e) {
+				System.out.print(" >> Auth Exec failed: "+ e);
+				throw e;
+			} finally {
+				if (em.isOpen()) {
+					em.close();
+				}
+			}
+			
 	   }
 	   
 	   public List<api.User> allUser() {
-		   EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "persister" );
-		   EntityManager em = emfactory.createEntityManager( );
-		   em.getTransaction( ).begin( );
+			EntityManager em = JPAUtil.createEntityManager();
+			   em.getTransaction( ).begin( );
+			   try {
 		   TypedQuery<User> tQuery =
 				   em.createQuery("SELECT p FROM users p ", User.class);
 		   List<User> p;
@@ -95,22 +110,30 @@ public class UserLogin implements Serializable {
 				System.out.println("No Result");	
 				return null;
 			}
-		   System.out.print("getUserAllInfo successfull");
+
 		   List<api.User> resultlist = new ArrayList<>();
 		   
 		   for (User px: p )
 		   {
 		   resultlist.add(new api.User(px.getUserId(),px.getUsername(),px.getMUser(),px.getName(),px.getPassword(),px.getRole(),px.getRowFlag(),px.getCUser(),px.getEmail(),px.getFirstname(),px.getCTs(),px.getCreateTime(),px.getMTs()));
 		   }
-		   System.out.print("getUserInfo successfull");
+		   System.out.print("getUserAllInfo successfull");
 		   return resultlist; 
+		   
+	   } catch (Exception e) {
+			System.out.print(" >> getUserAllInfo failed: "+ e);
+			throw e;
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
 	   }
 
 	public boolean createUser(String username, String mail, String name, String pass, String role) {
-	     EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "persister" );
-	     EntityManager entitymanager = emfactory.createEntityManager( );
-	     entitymanager.getTransaction( ).begin( );
-
+		EntityManager em = JPAUtil.createEntityManager();
+		   em.getTransaction( ).begin( );
+	     try {
 	     User user = new User();
 	      
 		user.setUsername(username);
@@ -119,33 +142,46 @@ public class UserLogin implements Serializable {
 		user.setPassword(pass);
 		user.setRole(role);
 		
-	     entitymanager.persist(user);
-	     entitymanager.getTransaction( ).commit( );
-	     entitymanager.close( );
-	     emfactory.close( ); 
-	     
+	     em.persist(user);
+	     em.getTransaction( ).commit( );
 	     System.out.print("createUser successfull");
 	     return true;
+	     
+	 } catch (Exception e) {
+			System.out.print(" >> createUser failed: "+ e);
+			throw e;
+		} finally {
+			if (em.isOpen()) {
+				em.close();
+			}
+		}
 	}
 
 	public boolean deleteUser(Integer userId) {
-	      EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "persister" );	      
-	      EntityManager entitymanager = emfactory.createEntityManager( );
-	      entitymanager.getTransaction( ).begin( );
-	      User User = entitymanager.find( User.class, userId );
-	      entitymanager.remove(User);
-	      entitymanager.getTransaction().commit();
+		EntityManager em = JPAUtil.createEntityManager();
+		   em.getTransaction( ).begin( );
+		   try {
+	      User User = em.find( User.class, userId );
+	      em.remove(User);
+	      em.getTransaction().commit();
 		  System.out.print("deleteUser successfull");
 		  return true;
+		   } catch (Exception e) {
+				System.out.print(" >> deleteUser failed: "+ e);
+				throw e;
+			} finally {
+				if (em.isOpen()) {
+					em.close();
+				}
+			}
 	}
 
 	public boolean updateUser(api.User r) {
 
-	     EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "persister" );
-	     EntityManager entitymanager = emfactory.createEntityManager( );
-	     entitymanager.getTransaction( ).begin( );
-	          
-	     User user = entitymanager.find( User.class, r.getUserId());
+		EntityManager em = JPAUtil.createEntityManager();
+		   em.getTransaction( ).begin( );
+	          try {
+	     User user = em.find( User.class, r.getUserId());
 		 Date date= new Date();     
 		 long time = date.getTime();
 		 Timestamp ts = new Timestamp(time);
@@ -160,12 +196,18 @@ public class UserLogin implements Serializable {
 			user.setCTs(ts);
 			user.setCreateTime(ts);
 			
-	     entitymanager.getTransaction( ).commit( );
-	     entitymanager.close();
-	     emfactory.close();
-	    
+	     em.getTransaction( ).commit( );
 	     System.out.print("updateUser successfull");
 	     return true;
+	     
+	          } catch (Exception e) {
+					System.out.print(" >> updateUser failed: "+ e);
+					throw e;
+				} finally {
+					if (em.isOpen()) {
+						em.close();
+					}
+				}
 	}
 
 }

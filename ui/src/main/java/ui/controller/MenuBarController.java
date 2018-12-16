@@ -28,11 +28,6 @@ public class MenuBarController {
 	public void mngtUser() {
 		NavigationController.getInstance().showUserMngt();
 	}
-
-	@FXML
-	public void showAboutView() {
-		NavigationController.getInstance().showAboutView();
-	}
 	
 	@FXML
 	public void showStatView() {

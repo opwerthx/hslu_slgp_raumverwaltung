@@ -1,12 +1,13 @@
 package ui.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.rmi.Naming;
 import java.util.HashMap;
 import java.util.Map;
+
 import api.Booking;
 import api.RMI_Booking;
 import api.RMI_Room;
@@ -17,7 +18,7 @@ import api.User;
 public class Context {
 	
 	private String Username;
-	private String rmiServerIP = "10.177.3.159"; //127.0.0.1 // 10.177.3.159
+	private String rmiServerIP = "127.0.0.1";//"10.177.3.159"; //"127.0.0.1" // 10.177.3.159
 	private int rmiPort = 1099;
 	/* Name der Policy-Datei (für SecurityManager) */
 	private static final String POLICY_FILE_NAME = "rmi_client.policy";
@@ -38,6 +39,9 @@ public class Context {
 	private static Map<String, Room> objectRoomMap = new HashMap<>();
 //	
 	private Context() throws Exception {
+		setServer();
+		System.out.println(rmiServerIP);
+		System.out.println(rmiPort);
 		bookingRO = getRMIBookingRemoteObjectStub();
 		userRO = getRMIUserRemoteObjectStub();
 		roomRO = getRMIRoomRemoteObjectStub();
@@ -73,7 +77,6 @@ public class Context {
 		return userRO;
 	}
 	
-	
 	private RMI_Room getRMIRoomRemoteObjectStub() throws Exception{
 		System.setProperty("java.security.policy", "checker.policy");
 
@@ -87,8 +90,6 @@ public class Context {
 		return roomRO;
 	}
 
-	
-	
 	public synchronized static Context getInstance() {
 
 		if (INSTANCE == null) {
@@ -129,41 +130,44 @@ public class Context {
 		return objectRoomMap;
 	}
 
-
 	/* Diese Methode setzt den SecurityManager */
 	private void setSecurityManager() throws IOException {
 
-		/*
-		 * Hinweis: die policy-File ist entweder im Verzeichnis 'src' oder in
-		 * 'resources', wenn man mit maven arbeitet
-		 */
+	System.setProperty("java.security.policy", "checker.policy");
 
-		InputStream is = this.getClass().getClassLoader().getResourceAsStream(POLICY_FILE_NAME);
-
-		File tempFile = File.createTempFile(System.getProperty("user.home") + File.separator + "tempFile", ".policy");
-
-		FileOutputStream fos = new FileOutputStream(tempFile);
-
-		/* Inhalt der policy-Datei in 'tempFile' kopieren */
-		int n = 0;
-
-		while ((n = is.read()) != -1) {
-			fos.write(n);
-		}
-
-		is.close();
-		fos.close();
-
-		String pathToTempPolicyFile = tempFile.getAbsolutePath();
-
-		tempFile.deleteOnExit();
-//		if (System.getSecurityManager() == null) {
-//			/* Policy-File muss im ROOT-Verzeichnis des Projekts sein! */
-//			System.setProperty("java.security.policy", pathToTempPolicyFile);
-//			System.setSecurityManager(new SecurityManager());
-//		}
+	if (System.getSecurityManager() == null) {
+		System.setSecurityManager(new SecurityManager());
+	}
+	}
+	
+	private void setServer() throws IOException {
 		
-		System.setProperty("java.security.policy", "checker.policy");
+		String directory = System.getProperty("user.home");  
+		String fileName = CONFIG_FILE_NAME;  
+		String absolutePath = directory + File.separator + fileName;
+		String Server = "";
+		// read the content from file
+		try(FileReader fileReader = new FileReader(absolutePath)) {  
+		    int ch = fileReader.read();
+		    while(ch != -1) {
+		        Server += ((char)ch);
+		        ch = fileReader.read();        
+		    }
+		} catch (FileNotFoundException e) {
+		    // exception handling
+		} catch (IOException e) {
+		    // exception handling
+		}
+		
+        String[] values = Server.split("\n");
+        try {
+        rmiServerIP = values[0]; //.replace("\n", "").replace("\r", "");;
+        //rmiPort = Integer.parseInt(values[1].replace("\n", "").replace("\r", ""));
+        } catch (ArrayIndexOutOfBoundsException e) {
+        	System.out.println(e); 
+        }
+        
+    	System.setProperty("java.security.policy", "checker.policy");
 
 		if (System.getSecurityManager() == null) {
 			System.setSecurityManager(new SecurityManager());
@@ -173,12 +177,9 @@ public class Context {
 
 	public void setLoginUser(String pUser) {
 		this.Username = pUser;
-		System.out.println("set username");
-		
 	}
 	
 	public String getLoginUser() {
-		System.out.println("get username");
 		return this.Username;
 	}
 	

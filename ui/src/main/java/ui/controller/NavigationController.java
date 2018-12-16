@@ -96,19 +96,6 @@ public class NavigationController {
 		}
 	}
 	
-	public void showAboutView() {
-
-		try {
-			FlowPane menuBar = FXMLLoader.load(getClass().getResource("MenuBar.fxml"));
-			/* MenuBar im 'top' Bereich des Haupt-Containers ablegen */
-			mainRoot.setTop(menuBar);
-			AnchorPane root = FXMLLoader.load(getClass().getResource("AboutView.fxml"));
-			mainRoot.setCenter(root);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	public void showRoomMngt() {
 
 		try {

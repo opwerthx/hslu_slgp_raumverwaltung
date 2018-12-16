@@ -38,7 +38,7 @@
                </font>
             </Text>
             <Label id="server" text="AlphaRooms Server:" GridPane.rowIndex="1" />
-            <TextField fx:id="server" onAction="#processLogin" prefWidth="126.0" text="127.0.0.1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="server" disable="true" onAction="#processLogin" prefWidth="126.0" text="10.177.3.159" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                  <Label fx:id="errorMessage" textFill="RED" GridPane.rowIndex="4" />
          </children>
       </GridPane>

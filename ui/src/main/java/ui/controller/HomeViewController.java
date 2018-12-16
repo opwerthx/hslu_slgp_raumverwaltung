@@ -43,7 +43,7 @@ public class HomeViewController implements Initializable {
 
 	    	errorMessage.setTextFill(Color.FIREBRICK);
 	    	errorMessage.setText("Sign in progress");
-	   
+
 	    		String user = userId.getText();
 	    		String pass = password.getText();
 	    		System.out.println(server.getText());

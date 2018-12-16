@@ -165,7 +165,7 @@ public class AddViewController implements Initializable  {
     	
 try {
 	System.out.println("save begin");
-			
+		
 		LocalDateTime tsfrom = from.getDateTimeValue();
 		LocalDateTime tsto = to.getDateTimeValue();
 		
@@ -174,6 +174,21 @@ try {
 		Timestamp ts_from = Timestamp.valueOf(tsfrom); 
 		Timestamp ts_to = Timestamp.valueOf(tsto);
 	
+		ArrayList rooms = new ArrayList();
+		List<Room> tempListe = null;
+		try {
+			tempListe = Context.getInstance().getRMI_Room().getOptRooms(ts_from,ts_to,0);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		rooms.clear();
+		for (Room p : tempListe) {
+			rooms.add(p.getRoomId());
+		}
+		
+		if (rooms.contains(table_room.getSelectionModel().getSelectedItem().getRoomId()))
+		{
 		booking.setBkFrom(ts_from);
 		booking.setBkTo(ts_to);
 		Timestamp now = new Timestamp(System.currentTimeMillis());
@@ -197,7 +212,14 @@ try {
 		alert.setContentText(MESSAGE_HINZUFUEGEN_ERFOLGREICH);
 		alert.showAndWait();
 		NavigationController.getInstance().showBookingView();
-
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Wählen Sie einen anderen Raum.");
+			alert.setHeaderText("Raum bereits gebucht!");
+			alert.setContentText(MESSAGE_HINZUFUEGEN_MISSLUNGEN);
+			alert.showAndWait();
+		}
 
 		} catch (Exception e) {
 			lblErrorMessage.setText(MESSAGE_HINZUFUEGEN_MISSLUNGEN);
